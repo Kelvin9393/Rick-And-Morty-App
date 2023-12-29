@@ -9,11 +9,11 @@ import UIKit
 import Combine
 
 protocol HomeFactory {
-    func makeModule() -> UIViewController
+    func makeModule(coordinator: HomeMenuViewContollerCoordinator) -> UIViewController
 }
 
 struct HomeFactoryImp: HomeFactory {
-    func makeModule() -> UIViewController {
+    func makeModule(coordinator: HomeMenuViewContollerCoordinator) -> UIViewController {
         let apiClientService = ApiClientServiceImp()
         let menuRepository = MenuRepositoryImp(apiClientService: apiClientService, urlList: Endpoint.baseUrl)
         let loadMenuUseCase = LoadMenuUseCaseImp(menuRepository: menuRepository)
@@ -21,20 +21,26 @@ struct HomeFactoryImp: HomeFactory {
         let homeMenuViewModel = HomeMenuViewModelImp(state: state, loadMenuUseCase: loadMenuUseCase)
         let homeMenuController = HomeMenuController(
             homeMenuViewModel: homeMenuViewModel,
-            layout: makeLayout()
+            layout: makeLayout(),
+            coordinator: coordinator
         )
-        homeMenuController.title = "Rick And Morty"
+        homeMenuController.title = AppLocalized.appName
         return homeMenuController
     }
 
     private func makeLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        let layoutWidth = (UIScreen.main.bounds.width - 20) / 2
-        let layoutHeight = (UIScreen.main.bounds.width - 20) / 2
+        let layoutWidth = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
+        let layoutHeight = (ViewValues.widthScreen - ViewValues.doublePadding) / ViewValues.multiplierTwo
         layout.itemSize = .init(width: layoutWidth, height: layoutHeight)
         layout.minimumLineSpacing = .zero
         layout.minimumInteritemSpacing = .zero
-        layout.sectionInset = .init(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = .init(
+            top: 0,
+            left: ViewValues.normalPadding,
+            bottom: 0,
+            right: ViewValues.normalPadding
+        )
         return layout
     }
 }
