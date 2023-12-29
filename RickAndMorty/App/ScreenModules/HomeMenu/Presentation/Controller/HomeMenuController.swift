@@ -35,16 +35,17 @@ class HomeMenuController: UICollectionViewController {
         viewModel
             .state
             .receive(on: RunLoop.main)
-            .sink { state in
-            switch state {
-            case .success:
-                self.collectionView.reloadData()
-            case .loading:
-                print("loading")
-            case .fail(let error):
-                print("error", error)
-            }
-        }.store(in: &cancellables)
+            .sink { [weak self] state in
+                self?.hideSpinner()
+                switch state {
+                case .success:
+                    self?.collectionView.reloadData()
+                case .loading:
+                    self?.showSpinner()
+                case .fail(let error):
+                    self?.presentAlert(message: error, title: "Error")
+                }
+            }.store(in: &cancellables)
     }
 
     private func configUI() {
@@ -74,3 +75,7 @@ extension HomeMenuController {
         return cell
     }
 }
+
+extension HomeMenuController: SpinnerDisplayable { }
+
+extension HomeMenuController: MessageDisplayable { }
