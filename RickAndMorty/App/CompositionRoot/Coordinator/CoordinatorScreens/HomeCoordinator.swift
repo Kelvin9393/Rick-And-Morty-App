@@ -10,6 +10,7 @@ import UIKit
 final class HomeCoordinator: Coordinator {
     var navigation: UINavigationController
     private let homeFactory: HomeFactory
+    private var charactersCoordinator: Coordinator?
 
     init(navigation: UINavigationController, factory: HomeFactory) {
         self.navigation = navigation
@@ -27,7 +28,7 @@ extension HomeCoordinator: HomeMenuViewContollerCoordinator {
         // TODO: Use enum or struct to avoid string directly
         switch model.title {
         case "characters":
-            goToCharacters()
+            goToCharacters(urlList: model.url)
         case "episodes":
             goToEpisodes()
         case "locations":
@@ -37,8 +38,11 @@ extension HomeCoordinator: HomeMenuViewContollerCoordinator {
         }
     }
 
-    private func goToCharacters() {
-        print("screen characters")
+    private func goToCharacters(urlList: String) {
+        charactersCoordinator = homeFactory.makeCharactersCoordinator(
+            navigation: navigation,
+            urlList: urlList)
+        charactersCoordinator?.start()
     }
 
     private func goToEpisodes() {

@@ -65,4 +65,14 @@ extension UIView {
         centerX()
         centerY()
     }
+
+    func setHeightConstraint(with height: CGFloat) {
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+
+    func setWidthConstraint(with width: CGFloat) {
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
 }

@@ -17,4 +17,7 @@ struct ViewValues {
     static let defaultCornerRadius: CGFloat = 10
     static let gradientTitleStart: NSNumber = 0.6
     static let gradientTitleEnd: NSNumber = 0.9
+
+    static let defaultCellHeight: CGFloat = 44
+    static let defaultContainerCellHeight: CGFloat = 100
 }

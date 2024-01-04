@@ -8,10 +8,8 @@
 import Combine
 import Foundation
 
-protocol HomeMenuViewModel {
-    var state: PassthroughSubject<StateController, Never> { get }
+protocol HomeMenuViewModel: BaseViewModel {
     var menuItemsCount: Int { get }
-    func viewDidLoad()
     func getMenuItemViewModel(indexPath: IndexPath) -> HomeMenuItemViewModel
     func getMenuItem(indexPath: IndexPath) -> MenuItem
 }
