@@ -95,11 +95,7 @@ extension CharactersViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if !viewModel.isLastPage {
-            tableView.tableFooterView?.isHidden = false
-        } else {
-            tableView.tableFooterView?.isHidden = true
-        }
+        tableView.tableFooterView?.isHidden = viewModel.isLastPage
     }
 }
 

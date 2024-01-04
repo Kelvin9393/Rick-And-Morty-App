@@ -22,10 +22,12 @@ struct CharactersFactoryImp: CharactersFactory {
             charactersRepository: characterRepository,
             url: urlList
         )
+        let lastPageValidationUseCase = LastPageValidationUseCaseImp()
         let state = PassthroughSubject<StateController, Never>()
         let viewModel = CharactersViewModelImp(
             state: state,
-            loadCharactersUseCase: loadCharactersUseCase
+            loadCharactersUseCase: loadCharactersUseCase,
+            lastPageValidationUseCase: lastPageValidationUseCase
         )
         let controller = CharactersViewController(
             coordinator: coordinator,
