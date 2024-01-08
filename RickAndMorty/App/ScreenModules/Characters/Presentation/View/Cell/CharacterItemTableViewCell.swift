@@ -22,7 +22,6 @@ class CharacterItemTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.setWidthConstraint(with: ViewValues.defaultContainerCellHeight)
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: Images.defaultImage)
         return imageView
     }()
 
@@ -55,6 +54,8 @@ class CharacterItemTableViewCell: UITableViewCell {
         return label
     }()
 
+    private var task: Task<Void, Never>?
+
     // MARK: - Lifecyle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,6 +64,12 @@ class CharacterItemTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        task?.cancel()
     }
 
     // MARK: - Helpers
@@ -104,6 +111,20 @@ class CharacterItemTableViewCell: UITableViewCell {
         nameLabel.text = viewModel.name
         specieLabel.text = viewModel.specie
         statusLabel.text = viewModel.status
+        setImage(viewModel: viewModel)
+    }
+
+    private func setImage(viewModel: CharacterItemViewModel) {
+        characterImageView.addDefaultImage()
+
+        if let data = viewModel.imageData {
+            characterImageView.setImageFromData(data: data)
+        } else {
+            task = Task {
+                let imageData = await viewModel.getImageData()
+                characterImageView.setImageFromData(data: imageData)
+            }
+        }
     }
 }
 

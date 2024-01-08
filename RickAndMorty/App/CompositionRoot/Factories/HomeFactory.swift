@@ -14,8 +14,11 @@ protocol HomeFactory {
 }
 
 struct HomeFactoryImp: HomeFactory {
+
+    let appContainer: AppContainer
+    
     func makeModule(coordinator: HomeMenuViewContollerCoordinator) -> UIViewController {
-        let apiClientService = ApiClientServiceImp()
+        let apiClientService = appContainer.apiClient
         let menuRepository = MenuRepositoryImp(apiClientService: apiClientService, urlList: Endpoint.baseUrl)
         let loadMenuUseCase = LoadMenuUseCaseImp(menuRepository: menuRepository)
         let state = PassthroughSubject<StateController, Never>()
@@ -49,7 +52,10 @@ struct HomeFactoryImp: HomeFactory {
         navigation: UINavigationController,
         urlList: String
     ) -> Coordinator {
-        let charactersFactory = CharactersFactoryImp(urlList: urlList)
+        let charactersFactory = CharactersFactoryImp(
+            urlList: urlList,
+            appContainer: appContainer
+        )
         let coordinator = CharacterCoordinator(
             navigation: navigation,
             charactersFactory: charactersFactory

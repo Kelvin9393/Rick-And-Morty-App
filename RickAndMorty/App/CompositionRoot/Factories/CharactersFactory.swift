@@ -14,9 +14,10 @@ protocol CharactersFactory {
 
 struct CharactersFactoryImp: CharactersFactory {
     let urlList: String
+    let appContainer: AppContainer
 
     func makeModule(coordinator: CharactersViewControllerCoordinator) -> UIViewController {
-        let apiClientService = ApiClientServiceImp()
+        let apiClientService = appContainer.apiClient
         let characterRepository = CharacterRepositoryImp(apiClientService: apiClientService)
         let loadCharactersUseCase = LoadCharacterUseCaseImp(
             charactersRepository: characterRepository,
@@ -27,7 +28,8 @@ struct CharactersFactoryImp: CharactersFactory {
         let viewModel = CharactersViewModelImp(
             state: state,
             loadCharactersUseCase: loadCharactersUseCase,
-            lastPageValidationUseCase: lastPageValidationUseCase
+            lastPageValidationUseCase: lastPageValidationUseCase,
+            imageDataUseCase: appContainer.getDataImageUseCase()
         )
         let controller = CharactersViewController(
             coordinator: coordinator,

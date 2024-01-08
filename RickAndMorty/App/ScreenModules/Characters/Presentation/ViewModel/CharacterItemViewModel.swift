@@ -8,11 +8,8 @@
 import Foundation
 
 struct CharacterItemViewModel {
-    private let character: Character
-
-    init(character: Character) {
-        self.character = character
-    }
+    private(set) var character: Character
+    private(set) var imageDataUseCase: ImageDataUseCase
 
     var name: String {
         character.name
@@ -24,5 +21,16 @@ struct CharacterItemViewModel {
 
     var status: String {
         character.status?.description ?? ""
+    }
+
+    var imageData: Data? {
+        imageDataUseCase.getDataFromCache(url: URL(
+            string: character.urlImage ?? .empty
+        ))
+    }
+
+    func getImageData() async -> Data? {
+        let url = URL(string: character.urlImage ?? .empty)
+        return await imageDataUseCase.getData(url: url)
     }
 }

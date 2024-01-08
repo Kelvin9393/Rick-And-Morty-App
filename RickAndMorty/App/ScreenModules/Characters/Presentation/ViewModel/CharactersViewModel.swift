@@ -28,15 +28,18 @@ final class CharactersViewModelImp: CharactersViewModel {
     private var characters = [Character]()
     private let loadCharactersUseCase: LoadCharactersUseCase
     private var lastPageValidationUseCase: LastPageValidationUseCase
+    private let imageDataUseCase: ImageDataUseCase
 
     init(
         state: PassthroughSubject<StateController, Never>,
         loadCharactersUseCase: LoadCharactersUseCase,
-        lastPageValidationUseCase: LastPageValidationUseCase
+        lastPageValidationUseCase: LastPageValidationUseCase,
+        imageDataUseCase: ImageDataUseCase
     ) {
         self.state = state
         self.loadCharactersUseCase = loadCharactersUseCase
         self.lastPageValidationUseCase = lastPageValidationUseCase
+        self.imageDataUseCase = imageDataUseCase
     }
 
     func viewDidLoad() {
@@ -76,7 +79,10 @@ final class CharactersViewModelImp: CharactersViewModel {
 
     private func makeCharacterItemViewModel(row: Int) -> CharacterItemViewModel {
         let character = characters[row]
-        let characterItemViewModel = CharacterItemViewModel(character: character)
+        let characterItemViewModel = CharacterItemViewModel(
+            character: character,
+            imageDataUseCase: imageDataUseCase
+        )
         return characterItemViewModel
     }
 
