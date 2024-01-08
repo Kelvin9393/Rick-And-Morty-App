@@ -74,6 +74,9 @@
 		F9C09E4B2B3E6FD7006B22C0 /* MenuDTO+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C09E4A2B3E6FD7006B22C0 /* MenuDTO+Mapper.swift */; };
 		F9C09E4D2B3E7053006B22C0 /* PropertyIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C09E4C2B3E7053006B22C0 /* PropertyIterator.swift */; };
 		F9C09E4F2B3E727B006B22C0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C09E4E2B3E727B006B22C0 /* Endpoint.swift */; };
+		F9DC44FB2B4BD42C00FF8190 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC44FA2B4BD42C00FF8190 /* CharacterDetailViewController.swift */; };
+		F9DC44FD2B4BD5F500FF8190 /* CharacterDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC44FC2B4BD5F500FF8190 /* CharacterDetailCoordinator.swift */; };
+		F9DC44FF2B4BD69800FF8190 /* CharacterDetailFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC44FE2B4BD69800FF8190 /* CharacterDetailFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +168,9 @@
 		F9C09E4A2B3E6FD7006B22C0 /* MenuDTO+Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuDTO+Mapper.swift"; sourceTree = "<group>"; };
 		F9C09E4C2B3E7053006B22C0 /* PropertyIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyIterator.swift; sourceTree = "<group>"; };
 		F9C09E4E2B3E727B006B22C0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		F9DC44FA2B4BD42C00FF8190 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		F9DC44FC2B4BD5F500FF8190 /* CharacterDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailCoordinator.swift; sourceTree = "<group>"; };
+		F9DC44FE2B4BD69800FF8190 /* CharacterDetailFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,6 +526,7 @@
 		F951ACC82B3727D5005295A1 /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
+				F9DC44F92B4BD41A00FF8190 /* Presentation */,
 			);
 			path = CharacterDetail;
 			sourceTree = "<group>";
@@ -664,6 +671,7 @@
 			children = (
 				F992A9B02B3AE8F9003CC37C /* HomeCoordinator.swift */,
 				F92BECA82B3F8EF100B598F4 /* CharacterCoordinator.swift */,
+				F9DC44FC2B4BD5F500FF8190 /* CharacterDetailCoordinator.swift */,
 			);
 			path = CoordinatorScreens;
 			sourceTree = "<group>";
@@ -674,6 +682,7 @@
 				F95B3C222B39B65B00822997 /* AppFactory.swift */,
 				F992A9B22B3AE954003CC37C /* HomeFactory.swift */,
 				F92BECA32B3F8D5700B598F4 /* CharactersFactory.swift */,
+				F9DC44FE2B4BD69800FF8190 /* CharacterDetailFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -795,6 +804,14 @@
 				F97870B62B44FF9C00CF67BA /* CharacterItemViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F9DC44F92B4BD41A00FF8190 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				F9DC44FA2B4BD42C00FF8190 /* CharacterDetailViewController.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -962,6 +979,7 @@
 				F9C09E432B3E651E006B22C0 /* ApiError.swift in Sources */,
 				F92BECA92B3F8EF200B598F4 /* CharacterCoordinator.swift in Sources */,
 				F992A9B72B3AF502003CC37C /* UIView+Constraints.swift in Sources */,
+				F9DC44FF2B4BD69800FF8190 /* CharacterDetailFactory.swift in Sources */,
 				F9C09E4F2B3E727B006B22C0 /* Endpoint.swift in Sources */,
 				F933112D2B4152E20081B1A4 /* CharacterStatus.swift in Sources */,
 				F92BECA22B3F89C300B598F4 /* Images.swift in Sources */,
@@ -985,8 +1003,10 @@
 				F9601F542B463EBA008AA00B /* LastPageValidationUseCase.swift in Sources */,
 				F97870B52B44FEF900CF67BA /* CharactersViewModel.swift in Sources */,
 				F9C09E492B3E6F24006B22C0 /* MenuDTO.swift in Sources */,
+				F9DC44FD2B4BD5F500FF8190 /* CharacterDetailCoordinator.swift in Sources */,
 				F92BEC9C2B3EEA8800B598F4 /* MessageDisplayable.swift in Sources */,
 				F93311352B4159440081B1A4 /* Location.swift in Sources */,
+				F9DC44FB2B4BD42C00FF8190 /* CharacterDetailViewController.swift in Sources */,
 				F93311392B4163BD0081B1A4 /* CharactersResultsDTO.swift in Sources */,
 				F93311282B41457D0081B1A4 /* CharacterItemTableViewCell.swift in Sources */,
 				F92BECA72B3F8DE100B598F4 /* CharactersViewController.swift in Sources */,

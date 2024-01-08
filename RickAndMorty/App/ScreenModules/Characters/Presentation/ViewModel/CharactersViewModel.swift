@@ -11,7 +11,7 @@ protocol CharactersViewModel: BaseViewModel {
     var characterItemsCount: Int { get  }
     var isLastPage: Bool { get }
     func getCharacterItemViewModel(row: Int) -> CharacterItemViewModel
-    func getUrlList(row: Int) -> String
+    func getUrlDetail(row: Int) -> String
 }
 
 final class CharactersViewModelImp: CharactersViewModel {
@@ -86,7 +86,7 @@ final class CharactersViewModelImp: CharactersViewModel {
         return characterItemViewModel
     }
 
-    func getUrlList(row: Int) -> String {
+    func getUrlDetail(row: Int) -> String {
         let character = characters[row]
         return character.urlCharacter
     }

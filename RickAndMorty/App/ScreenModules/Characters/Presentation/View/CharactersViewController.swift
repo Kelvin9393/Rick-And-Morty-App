@@ -8,21 +8,21 @@
 import UIKit
 import Combine
 
-protocol CharactersViewControllerCoordinator: AnyObject {
-    func didSelectMenuCell(urlDetail: String)
+protocol CharactersViewControllerCoordinator {
+    func didSelectCell(urlDetail: String)
 }
 
 class CharactersViewController: UITableViewController {
 
     // MARK: - Private Properties
-    private weak var coordinator: CharactersViewControllerCoordinator?
+    private var coordinator: CharactersViewControllerCoordinator
     private var cancellables = Set<AnyCancellable>()
     private let viewModel: CharactersViewModel
 
     // MARK: - Lifecyle
     init(
-        coordinator: CharactersViewControllerCoordinator?,
-        viewModel: CharactersViewModel
+        viewModel: CharactersViewModel,
+        coordinator: CharactersViewControllerCoordinator
     ) {
         self.coordinator = coordinator
         self.viewModel = viewModel
@@ -88,14 +88,18 @@ extension CharactersViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let urlDetail = viewModel.getUrlList(row: indexPath.row)
-        coordinator?.didSelectMenuCell(urlDetail: urlDetail)
-    }
-
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tableView.tableFooterView?.isHidden = viewModel.isLastPage
+    }
+}
+
+extension CharactersViewController {
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let urlDetail = viewModel.getUrlDetail(row: indexPath.row)
+        coordinator.didSelectCell(urlDetail: urlDetail)
     }
 }
 
