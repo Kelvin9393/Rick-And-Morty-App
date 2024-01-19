@@ -30,7 +30,7 @@ struct CharactersFactoryImp: CharactersFactory {
             state: state,
             loadCharactersUseCase: loadCharactersUseCase,
             lastPageValidationUseCase: lastPageValidationUseCase,
-            imageDataUseCase: appContainer.getDataImageUseCase()
+            imageDataUseCase: appContainer.getImageDataUseCase()
         )
         let controller = CharactersViewController(
             viewModel: viewModel,

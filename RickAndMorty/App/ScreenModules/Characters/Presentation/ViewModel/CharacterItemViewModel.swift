@@ -24,11 +24,10 @@ struct CharacterItemViewModel {
     }
 
     var imageData: Data? {
-        imageDataUseCase.getDataFromCache(url: URL(
-            string: character.urlImage ?? .empty
-        ))
+        imageDataUseCase.getDataFromCache(url: character.urlImage)
     }
 
+    // TODO: - create the URL in the Data layer not in the Presentation layer
     func getImageData() async -> Data? {
         let url = URL(string: character.urlImage ?? .empty)
         return await imageDataUseCase.getData(url: url)

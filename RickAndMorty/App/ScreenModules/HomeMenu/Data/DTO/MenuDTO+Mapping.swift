@@ -1,5 +1,5 @@
 //
-//  MenuDTO+Mapper.swift
+//  MenuDTO+Mapping.swift
 //  RickAndMorty
 //
 //  Created by KELVIN LING SHENG SIANG on 29/12/2023.
