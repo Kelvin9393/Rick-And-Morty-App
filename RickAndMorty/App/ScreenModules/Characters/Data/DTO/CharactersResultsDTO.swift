@@ -12,4 +12,4 @@ struct CharactersResultsDTO: Decodable {
     let info: InfoDTO
 }
 
-extension CharactersResultsDTO: PropertyIterator { }
+//extension CharactersResultsDTO: PropertyIterator { }

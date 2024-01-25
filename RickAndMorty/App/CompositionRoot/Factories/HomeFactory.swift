@@ -9,8 +9,24 @@ import UIKit
 import Combine
 
 protocol HomeFactory {
-    func makeModule(coordinator: HomeMenuViewContollerCoordinator) -> UIViewController
-    func makeCharactersCoordinator(navigation: UINavigationController, urlList: String) -> Coordinator
+    func makeModule(
+        coordinator: HomeMenuViewContollerCoordinator
+    ) -> UIViewController
+
+    func makeCharactersCoordinator(
+        navigation: UINavigationController,
+        urlList: String
+    ) -> Coordinator
+
+    func makeLocationsCoordinator(
+        navigation: UINavigationController,
+        urlLocations: String
+    ) -> Coordinator
+
+    func makeEpisodesCoordinator(
+        navigation: UINavigationController,
+        urlEpisodes: String
+    ) -> Coordinator
 }
 
 struct HomeFactoryImp: HomeFactory {
@@ -59,6 +75,36 @@ struct HomeFactoryImp: HomeFactory {
         let coordinator = CharacterCoordinator(
             navigation: navigation,
             charactersFactory: charactersFactory
+        )
+        return coordinator
+    }
+
+    func makeLocationsCoordinator(
+        navigation: UINavigationController,
+        urlLocations: String
+    ) -> Coordinator {
+        let locationsFactory = LocationsFactoryImp(
+            urlLocations: urlLocations,
+            appContainer: appContainer
+        )
+        let coordinator = LocationsCoordinator(
+            navigation: navigation,
+            locationsFactory: locationsFactory
+        )
+        return coordinator
+    }
+
+    func makeEpisodesCoordinator(
+        navigation: UINavigationController,
+        urlEpisodes: String
+    ) -> Coordinator {
+        let episodesFactory = EpisodesFactoryImp(
+            urlEpisodes: urlEpisodes,
+            appContainer: appContainer
+        )
+        let coordinator = EpisodesCoordinator(
+            episodesFactory: episodesFactory,
+            navigation: navigation
         )
         return coordinator
     }

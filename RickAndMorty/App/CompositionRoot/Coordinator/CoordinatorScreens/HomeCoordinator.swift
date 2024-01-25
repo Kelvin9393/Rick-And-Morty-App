@@ -11,6 +11,7 @@ final class HomeCoordinator: Coordinator {
     var navigation: UINavigationController
     private let homeFactory: HomeFactory
     private var charactersCoordinator: Coordinator?
+    private var locationsCoordinator: Coordinator?
 
     init(navigation: UINavigationController, factory: HomeFactory) {
         self.navigation = navigation
@@ -30,9 +31,9 @@ extension HomeCoordinator: HomeMenuViewContollerCoordinator {
         case "characters":
             goToCharacters(urlList: model.url)
         case "episodes":
-            goToEpisodes()
+            goToEpisodes(urlEpisodes: model.url)
         case "locations":
-            goToLocations()
+            goToLocations(urlLocations: model.url)
         default:
             break
         }
@@ -45,11 +46,19 @@ extension HomeCoordinator: HomeMenuViewContollerCoordinator {
         charactersCoordinator?.start()
     }
 
-    private func goToEpisodes() {
-        print("screen episodes")
+    private func goToEpisodes(urlEpisodes: String) {
+        let episodesCoordinator = homeFactory
+            .makeEpisodesCoordinator(
+                navigation: navigation,
+                urlEpisodes: urlEpisodes)
+        episodesCoordinator.start()
     }
 
-    private func goToLocations() {
-        print("screen locations")
+    private func goToLocations(urlLocations: String) {
+        locationsCoordinator = homeFactory
+            .makeLocationsCoordinator(
+                navigation: navigation,
+                urlLocations: urlLocations)
+        locationsCoordinator?.start()
     }
 }
